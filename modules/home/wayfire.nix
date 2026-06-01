@@ -32,12 +32,6 @@
     command_print_full = sh -c 'grim - | wl-copy'
     binding_print_full = <shift> KEY_SYSRQ
 
-    [window-rules]
-    ow_no_decorations = title is "Overwatch"
-    ow_no_decorations_action = remove-decorations
-    ow_fullscreen = title is "Overwatch"
-    ow_fullscreen_action = fullscreen
-
     [output:DP-1]
     mode = 1920x1080@165.001007
     vrr = true
