@@ -23,6 +23,11 @@
     [command]
     command_launcher = nwg-drawer
     binding_launcher = <super>
+
+    # ATALHO DO TERMINAL
+    command_terminal = ghostty
+    binding_terminal = <ctrl> <alt> KEY_T
+
     command_vol_up = swayosd-client --output-volume raise
     binding_vol_up = KEY_VOLUMEUP
 
