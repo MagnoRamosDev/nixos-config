@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   programs.waybar = {
@@ -10,9 +10,23 @@
         margin-top = 8;
         margin-left = 16;
         margin-right = 16;
-        modules-left = [ "custom/launcher" "wlr/workspaces" "custom/weather" ];
-        modules-center = [ "mpris" "clock" ];
-        modules-right = [ "pulseaudio" "network" "battery" "custom/notification" "tray" "custom/clipboard" ];
+        modules-left = [
+          "custom/launcher"
+          "wlr/workspaces"
+          "custom/weather"
+        ];
+        modules-center = [
+          "mpris"
+          "clock"
+        ];
+        modules-right = [
+          "pulseaudio"
+          "network"
+          "battery"
+          "custom/notification"
+          "tray"
+          "custom/clipboard"
+        ];
 
         "custom/launcher" = {
           format = " ";
@@ -71,7 +85,11 @@
           format = "{icon} {volume}%";
           format-muted = " Muted";
           format-icons = {
-            default = ["" "" ""];
+            default = [
+              ""
+              ""
+              ""
+            ];
           };
           on-click = "pwvucontrol";
           scroll-step = 5;

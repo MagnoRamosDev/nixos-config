@@ -25,5 +25,7 @@
     cliphist
     wl-clipboard
     mpvpaper
+    grim
+    slurp
   ];
 }

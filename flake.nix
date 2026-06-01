@@ -10,13 +10,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations."magno-pc" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hosts/magno-pc/configuration.nix
-        home-manager.nixosModules.home-manager
-      ];
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    {
+      nixosConfigurations."magno-pc" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/magno-pc/configuration.nix
+          home-manager.nixosModules.home-manager
+        ];
+      };
     };
-  };
 }

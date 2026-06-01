@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -8,7 +8,10 @@
   # ==========================================
   # FLAKES E PERMISSÕES
   # ==========================================
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -99,8 +102,10 @@
   programs.firefox.enable = true;
   programs.fish.enable = true;
   programs.steam.enable = true;
+  programs.gamescope.enable = true;
   programs.gamemode.enable = true;
   programs.nano.enable = false;
+  programs.nix-ld.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -111,7 +116,10 @@
     XKB_DEFAULT_MODEL = "abnt2";
   };
 
-  environment.pathsToLink = [ "/share/icons" "/share/pixmaps" ];
+  environment.pathsToLink = [
+    "/share/icons"
+    "/share/pixmaps"
+  ];
 
   environment.systemPackages = with pkgs; [
     (stdenv.mkDerivation {
@@ -163,7 +171,12 @@
   users.users.magno = {
     isNormalUser = true;
     description = "Magno";
-    extraGroups = [ "networkmanager" "wheel" "video" "input" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "input"
+    ];
     shell = pkgs.fish;
   };
 
@@ -179,54 +192,58 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-  home-manager.users.magno = { pkgs, ... }: {
-    home.stateVersion = "25.11";
-    home.enableNixpkgsReleaseCheck = false;
+  home-manager.users.magno =
+    { pkgs, ... }:
+    {
+      home.stateVersion = "25.11";
+      home.enableNixpkgsReleaseCheck = false;
 
-    imports = [
-      ../../modules/home/wayfire.nix
-      ../../modules/home/waybar.nix
-      ../../modules/home/pacotes.nix
+      imports = [
+        ../../modules/home/wayfire.nix
+        ../../modules/home/waybar.nix
+        ../../modules/home/pacotes.nix
 
-      # AMBIENTES DE DESENVOLVIMENTO
-      ../../modules/home/dev/dev-vala.nix
-      ../../modules/home/dev/dev-zig.nix
-      ../../modules/home/dev/dev-nix.nix
-    ];
+        # AMBIENTES DE DESENVOLVIMENTO
+        ../../modules/home/dev/dev-vala.nix
+        ../../modules/home/dev/dev-zig.nix
+        ../../modules/home/dev/dev-nix.nix
+      ];
 
-    home.sessionVariables = {
-      EDITOR = "subl";
-      XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
-      SDL_VIDEODRIVER = "x11";
+      home.sessionVariables = {
+        EDITOR = "subl";
+        XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
+        SDL_VIDEODRIVER = "x11";
+      };
+
+      services.swayosd.enable = true;
+
+      gtk = {
+        enable = true;
+        iconTheme = {
+          name = "WhiteSur";
+          package = pkgs.whitesur-icon-theme;
+        };
+        theme = {
+          name = "adw-gtk3-dark";
+          package = pkgs.adw-gtk3;
+        };
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+        gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+      };
+
+      dconf.settings = {
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+        };
+      };
     };
 
-    services.swayosd.enable = true;
-
-    gtk = {
-      enable = true;
-      iconTheme = {
-        name = "WhiteSur";
-        package = pkgs.whitesur-icon-theme;
-      };
-      theme = {
-        name = "adw-gtk3-dark";
-        package = pkgs.adw-gtk3;
-      };
-      gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-      gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+  home-manager.users.visitante =
+    { ... }:
+    {
+      home.stateVersion = "25.11";
+      home.enableNixpkgsReleaseCheck = false;
     };
-
-    dconf.settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-    };
-  };
-
-  home-manager.users.visitante = { pkgs, ... }: {
-    home.stateVersion = "25.11";
-    home.enableNixpkgsReleaseCheck = false;
-  };
 
   system.stateVersion = "25.11";
 }

@@ -26,6 +26,12 @@
     command_vol_up = swayosd-client --output-volume raise
     binding_vol_up = KEY_VOLUMEUP
 
+    command_print = sh -c 'grim -g "$(slurp)" - | wl-copy'
+    binding_print = KEY_SYSRQ
+
+    command_print_full = sh -c 'grim - | wl-copy'
+    binding_print_full = <shift> KEY_SYSRQ
+
     [window-rules]
     ow_no_decorations = title is "Overwatch"
     ow_no_decorations_action = remove-decorations
