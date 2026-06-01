@@ -2,6 +2,9 @@
 
 {
   home.packages = with pkgs; [
+    # O Compilador C
+    gcc
+
     # Compilador e Ferramentas
     vala
     meson
