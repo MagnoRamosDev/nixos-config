@@ -187,6 +187,11 @@
       ../../modules/home/wayfire.nix
       ../../modules/home/waybar.nix
       ../../modules/home/pacotes.nix
+
+      # AMBIENTES DE DESENVOLVIMENTO
+      ../../modules/home/dev/dev-vala.nix
+      ../../modules/home/dev/dev-zig.nix
+      ../../modules/home/dev/dev-nix.nix
     ];
 
     home.sessionVariables = {
