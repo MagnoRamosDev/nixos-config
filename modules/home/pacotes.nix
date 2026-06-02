@@ -21,11 +21,9 @@
     networkmanagerapplet
     gnome-calendar
     playerctl
-    # swaynotificationcenter
     mission-center
     cliphist
     wl-clipboard
-    # mpvpaper
     slurp
   ];
 

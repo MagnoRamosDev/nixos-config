@@ -159,7 +159,6 @@
     swayosd
     wlogout
     swaybg
-    nwg-drawer
 
     nautilus
     adwaita-icon-theme

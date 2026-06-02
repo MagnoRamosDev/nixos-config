@@ -15,7 +15,7 @@
     [autostart]
     dbus_update = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wayfire
 
-    panel = noctalia-shell
+    panel = bash -c 'pgrep -x noctalia-shell || noctalia-shell'
 
     # waybar = waybar
     # swaync = swaync
@@ -26,7 +26,7 @@
     cliphist_watch = wl-paste --type text --watch cliphist store
 
     [command]
-    command_launcher = nwg-drawer
+    command_launcher = noctalia-shell ipc call launcher toggle
     binding_launcher = <super>
 
     command_terminal = ghostty
