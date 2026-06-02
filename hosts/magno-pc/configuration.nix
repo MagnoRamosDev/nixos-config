@@ -8,10 +8,21 @@
   # ==========================================
   # FLAKES E PERMISSÕES
   # ==========================================
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    substituters = [
+      "https://cache.nixos.org"
+      "https://noctalia.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -49,6 +60,10 @@
     enable = true;
     enable32Bit = true;
   };
+
+  hardware.bluetooth.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
 
   services.btrfs.autoScrub = {
     enable = true;
@@ -159,9 +174,6 @@
     micro
     git
     wl-clipboard
-
-    karere
-    celeste
   ];
 
   # ==========================================
@@ -199,7 +211,7 @@
 
       imports = [
         ../../modules/home/wayfire.nix
-        ../../modules/home/waybar.nix
+        #../../modules/home/waybar.nix
         ../../modules/home/pacotes.nix
 
         # AMBIENTES DE DESENVOLVIMENTO

@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
+  imports = [
+    inputs.noctalia.homeModules.default
+  ];
+
   home.packages = with pkgs; [
     mangohud
     heroic
@@ -17,16 +21,26 @@
     networkmanagerapplet
     gnome-calendar
     playerctl
-    swaynotificationcenter
+    # swaynotificationcenter
     mission-center
     cliphist
     wl-clipboard
-    mpvpaper
+    # mpvpaper
     slurp
   ];
 
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+
+  programs.noctalia-shell = {
+    enable = true;
+    settings = {
+      bar = {
+        position = "top";
+        barType = "simple";
+      };
+    };
   };
 }

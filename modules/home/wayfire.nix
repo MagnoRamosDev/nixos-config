@@ -15,10 +15,13 @@
     [autostart]
     dbus_update = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wayfire
 
-    waybar = waybar
-    swaync = swaync
+    panel = noctalia-
+
+    # waybar = waybar
+    # swaync = swaync
+
     polkit = ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1
-    wallpaper = mpvpaper -o "loop no-audio" '*' ~/Videos/wallpaper.mp4
+    # wallpaper = mpvpaper -o "loop no-audio" '*' ~/Videos/wallpaper.mp4
     cliphist_store = cliphist store
     cliphist_watch = wl-paste --type text --watch cliphist store
 
