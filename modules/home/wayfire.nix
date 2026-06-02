@@ -15,7 +15,7 @@
     [autostart]
     dbus_update = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wayfire
 
-    panel = noctalia-
+    panel = noctalia-shell
 
     # waybar = waybar
     # swaync = swaync
