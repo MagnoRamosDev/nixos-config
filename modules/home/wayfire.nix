@@ -45,7 +45,9 @@
     toggle_fullscreen = <super> KEY_F
 
     [output:DP-1]
-    mode = 1920x1080@165.001007
-    vrr = true
+    mode = 1920x1080@165001
+    position = 0, 0
+    transform = normal
+    scale = 1.0
   '';
 }
