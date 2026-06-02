@@ -22,6 +22,7 @@
     cliphist
     wl-clipboard
     slurp
+    obsidian
   ];
 
   programs.direnv = {
