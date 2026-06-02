@@ -191,8 +191,10 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
+  home-manager.extraSpecialArgs = { inherit inputs; };
+
   home-manager.users.magno =
-    { pkgs, ... }:
+    { pkgs, inputs, ... }:
     {
       home.stateVersion = "25.11";
       home.enableNixpkgsReleaseCheck = false;
@@ -206,6 +208,9 @@
         ../../modules/home/dev/dev-vala.nix
         ../../modules/home/dev/dev-zig.nix
         ../../modules/home/dev/dev-nix.nix
+
+        # AGS / ASTAL (Desktop Shell)
+        ../../modules/home/ags.nix
       ];
 
       home.sessionVariables = {
