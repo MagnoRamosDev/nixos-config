@@ -3,7 +3,7 @@
 {
   xdg.configFile."wayfire.ini".text = ''
     [core]
-    plugins = autostart command vswitch move resize grid switcher window-rules animate wobbly decoration
+    plugins = autostart command vswitch move resize grid switcher window-rules animate wobbly decoration shortcuts-inhibit
 
     [input]
     xkb_layout = br
