@@ -1,11 +1,8 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = [
-    inputs.noctalia.homeModules.default
-  ];
-
   home.packages = with pkgs; [
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     mangohud
     heroic
     sublime4
@@ -30,15 +27,5 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  programs.noctalia-shell = {
-    enable = true;
-    settings = {
-      bar = {
-        position = "top";
-        barType = "simple";
-      };
-    };
   };
 }
