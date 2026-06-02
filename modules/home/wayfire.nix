@@ -17,14 +17,13 @@
     swaync = swaync
     polkit = ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1
     wallpaper = mpvpaper -o "loop no-audio" '*' ~/Videos/wallpaper.mp4
-    cliphist_store = cliphist store &
-    cliphist_watch = wl-paste --type text --watch cliphist store &
+    cliphist_store = cliphist store
+    cliphist_watch = wl-paste --type text --watch cliphist store
 
     [command]
     command_launcher = nwg-drawer
     binding_launcher = <super>
 
-    # ATALHO DO TERMINAL
     command_terminal = ghostty
     binding_terminal = <ctrl> <alt> KEY_T
 

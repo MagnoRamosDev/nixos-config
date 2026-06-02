@@ -5,10 +5,7 @@
     mangohud
     heroic
     sublime4
-    protonup-qt
-    bottles
     discord
-    onlyoffice-desktopeditors
     nh
     starship
     eza
@@ -25,7 +22,6 @@
     cliphist
     wl-clipboard
     mpvpaper
-    grim
     slurp
   ];
 }

@@ -141,7 +141,6 @@
     kdePackages.qt5compat
     kdePackages.polkit-kde-agent-1
 
-    waybar
     swayosd
     wlogout
     swaybg
@@ -229,6 +228,14 @@
         };
         gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
         gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+      };
+
+      home.pointerCursor = {
+        name = "breeze_cursors";
+        package = pkgs.kdePackages.breeze;
+        size = 24;
+        gtk.enable = true;
+        x11.enable = true;
       };
 
       dconf.settings = {
