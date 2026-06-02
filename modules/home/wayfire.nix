@@ -3,7 +3,7 @@
 {
   xdg.configFile."wayfire.ini".text = ''
     [core]
-    plugins = autostart command vswitch move resize grid switcher window-rules animate wobbly decoration shortcuts-inhibit
+    plugins = autostart command vswitch move resize grid switcher window-rules animate wobbly decoration shortcuts-inhibit wm-actions
 
     [input]
     xkb_layout = br
@@ -40,6 +40,9 @@
 
     command_print_full = sh -c 'grim - | wl-copy'
     binding_print_full = <shift> KEY_SYSRQ
+
+    [wm-actions]
+    toggle_fullscreen = <super> KEY_F
 
     [output:DP-1]
     mode = 1920x1080@165.001007
