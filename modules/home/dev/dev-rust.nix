@@ -5,6 +5,7 @@
     # Compilador e Gerenciador de Pacotes
     cargo
     rustc
+    gcc
 
     # Language Server para a IDE (Autocompletar e análise de erros em tempo real)
     rust-analyzer
