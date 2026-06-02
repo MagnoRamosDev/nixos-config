@@ -13,6 +13,8 @@
     next_view = <alt> KEY_TAB
 
     [autostart]
+    dbus_update = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wayfire
+
     waybar = waybar
     swaync = swaync
     polkit = ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1

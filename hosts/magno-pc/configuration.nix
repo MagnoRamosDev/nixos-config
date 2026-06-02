@@ -89,11 +89,11 @@
 
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
     ];
-    config.common.default = "*";
+    config.common.default = "wlr";
   };
 
   # ==========================================
@@ -203,9 +203,9 @@
         ../../modules/home/pacotes.nix
 
         # AMBIENTES DE DESENVOLVIMENTO
-        #../../modules/home/dev/dev-vala.nix
-        #../../modules/home/dev/dev-zig.nix
-        #../../modules/home/dev/dev-nix.nix
+        ../../modules/home/dev/dev-vala.nix
+        ../../modules/home/dev/dev-zig.nix
+        ../../modules/home/dev/dev-nix.nix
       ];
 
       home.sessionVariables = {
