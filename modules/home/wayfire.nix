@@ -48,6 +48,7 @@
     mode = 1920x1080@165001
     position = 0, 0
     transform = normal
+    adaptive_sync = true
     scale = 1.0
   '';
 }
