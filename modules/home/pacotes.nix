@@ -24,6 +24,7 @@
     slurp
     obsidian
     gnome-control-center
+    gnome-keyring
   ];
 
   programs.direnv = {
