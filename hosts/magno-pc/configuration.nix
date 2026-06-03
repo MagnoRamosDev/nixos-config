@@ -208,7 +208,7 @@
   home-manager.users.magno =
     { pkgs, ... }:
     {
-      home.stateVersion = "26.05";
+      home.stateVersion = "25.11";
       home.enableNixpkgsReleaseCheck = false;
 
       imports = [
@@ -264,9 +264,9 @@
   home-manager.users.visitante =
     { ... }:
     {
-      home.stateVersion = "26.05";
+      home.stateVersion = "25.11";
       home.enableNixpkgsReleaseCheck = false;
     };
 
-  system.stateVersion = "26.05";
+  system.stateVersion = "25.11";
 }
