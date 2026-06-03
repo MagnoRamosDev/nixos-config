@@ -81,7 +81,10 @@
         });
 
         wayfire = prev.wayfire.overrideAttrs (old: {
-          mesonFlags = (old.mesonFlags or []) ++ [ "-Dtests=disabled" ];
+          mesonFlags = (old.mesonFlags or []) ++ [
+            "-Dtests=disabled"
+            "-Dwf-touch:tests=disabled"
+          ];
         });
       })
     ];
