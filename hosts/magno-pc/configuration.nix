@@ -75,19 +75,19 @@
   # INTERFACE E LOGIN
   # ==========================================
   nixpkgs.overlays = [
-      (final: prev: {
-        wf-config = prev.wf-config.overrideAttrs (old: {
-          mesonFlags = (old.mesonFlags or []) ++ [ "-Dtests=disabled" ];
-        });
+    (final: prev: {
+      wf-config = prev.wf-config.overrideAttrs (old: {
+        mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dtests=disabled" ];
+      });
 
-        wayfire = prev.wayfire.overrideAttrs (old: {
-          mesonFlags = (old.mesonFlags or []) ++ [
-            "-Dtests=disabled"
-            "-Dwf-touch:tests=disabled"
-          ];
-        });
-      })
-    ];
+      wayfire = prev.wayfire.overrideAttrs (old: {
+        mesonFlags = (old.mesonFlags or [ ]) ++ [
+          "-Dtests=disabled"
+          "-Dwf-touch:tests=disabled"
+        ];
+      });
+    })
+  ];
 
   programs.wayfire = {
     enable = true;
@@ -241,8 +241,8 @@
 
       home.sessionVariables = {
         EDITOR = "subl";
-        XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
-        SDL_VIDEODRIVER = "x11";
+        # XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
+        # SDL_VIDEODRIVER = "x11";
       };
 
       services.swayosd.enable = true;

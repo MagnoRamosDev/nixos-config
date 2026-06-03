@@ -24,6 +24,7 @@
     slurp
     obsidian
     rclone
+    gamescope
   ];
 
   programs.direnv = {
