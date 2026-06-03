@@ -23,6 +23,7 @@
     wl-clipboard
     slurp
     obsidian
+    rclone
   ];
 
   programs.direnv = {
