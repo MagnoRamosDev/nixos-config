@@ -1,15 +1,6 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.overlays = [
-    (final: prev: {
-      wf-config = prev.wf-config.overrideAttrs (old: {
-        # Diz ao compilador Meson para não construir os testes,
-        # contornando a falta da biblioteca doctest.
-        mesonFlags = (old.mesonFlags or []) ++ [ "-Dtests=disabled" ];
-      });
-    })
-  ];
 
   xdg.configFile."wayfire.ini".text = ''
     [core]
