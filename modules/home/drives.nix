@@ -10,7 +10,8 @@
       WantedBy = [ "default.target" ];
     };
     Service = {
-      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: %h/GoogleDrive --vfs-cache-mode full";
+      # Aqui mudamos de gdrive: para google_drive:
+      ExecStart = "${pkgs.rclone}/bin/rclone mount google_drive: %h/GoogleDrive --vfs-cache-mode full";
       Restart = "on-failure";
       RestartSec = "10s";
     };
@@ -25,7 +26,8 @@
       WantedBy = [ "default.target" ];
     };
     Service = {
-      ExecStart = "${pkgs.rclone}/bin/rclone mount proton: %h/ProtonDrive --vfs-cache-mode full";
+      # Aqui mudamos de proton: para proton_drive:
+      ExecStart = "${pkgs.rclone}/bin/rclone mount proton_drive: %h/ProtonDrive --vfs-cache-mode full";
       Restart = "on-failure";
       RestartSec = "10s";
     };
