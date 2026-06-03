@@ -215,6 +215,7 @@
         ../../modules/home/wayfire.nix
         #../../modules/home/waybar.nix
         ../../modules/home/pacotes.nix
+        ../../modules/home/drives.nix
 
         # AMBIENTES DE DESENVOLVIMENTO
         # ../../modules/home/dev/dev-vala.nix
