@@ -23,6 +23,7 @@
     wl-clipboard
     slurp
     obsidian
+    gnome-control-center
   ];
 
   programs.direnv = {
