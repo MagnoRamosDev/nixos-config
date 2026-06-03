@@ -241,8 +241,8 @@
 
       home.sessionVariables = {
         EDITOR = "subl";
-        # XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
-        # SDL_VIDEODRIVER = "x11";
+        XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
+        SDL_VIDEODRIVER = "x11";
       };
 
       services.swayosd.enable = true;
