@@ -75,14 +75,16 @@
   # INTERFACE E LOGIN
   # ==========================================
   nixpkgs.overlays = [
-    (final: prev: {
-      wf-config = prev.wf-config.overrideAttrs (old: {
-        # Diz ao compilador Meson para não construir os testes,
-        # contornando a falta da biblioteca doctest.
-        mesonFlags = (old.mesonFlags or []) ++ [ "-Dtests=disabled" ];
-      });
-    })
-  ];
+      (final: prev: {
+        wf-config = prev.wf-config.overrideAttrs (old: {
+          mesonFlags = (old.mesonFlags or []) ++ [ "-Dtests=disabled" ];
+        });
+
+        wayfire = prev.wayfire.overrideAttrs (old: {
+          mesonFlags = (old.mesonFlags or []) ++ [ "-Dtests=disabled" ];
+        });
+      })
+    ];
 
   programs.wayfire = {
     enable = true;
