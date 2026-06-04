@@ -25,7 +25,7 @@
     obsidian
     rclone
     gamescope
-    teams
+    teams-for-linux
     zapzap
   ];
 
