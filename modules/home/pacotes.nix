@@ -25,6 +25,8 @@
     obsidian
     rclone
     gamescope
+    teams
+    zapzap
   ];
 
   programs.direnv = {
