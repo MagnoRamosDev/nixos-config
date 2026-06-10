@@ -27,6 +27,7 @@
     gamescope
     teams-for-linux
     zapzap
+    easyeffects
   ];
 
   programs.direnv = {
