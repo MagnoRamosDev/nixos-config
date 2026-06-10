@@ -27,7 +27,7 @@
     gamescope
     teams-for-linux
     zapzap
-    easyeffects
+    solaar
   ];
 
   programs.direnv = {
