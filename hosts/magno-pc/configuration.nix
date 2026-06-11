@@ -237,6 +237,7 @@
         ../../modules/home/dev/dev-zig.nix
         ../../modules/home/dev/dev-nix.nix
         ../../modules/home/dev/dev-rust.nix
+        ../../modules/home/dev/dev-python.nix
       ];
 
       home.sessionVariables = {
