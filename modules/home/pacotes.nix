@@ -28,6 +28,9 @@
     teams-for-linux
     zapzap
     solaar
+    grim
+    swappy
+    qalculate-gtk
   ];
 
   programs.direnv = {

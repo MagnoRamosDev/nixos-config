@@ -36,11 +36,13 @@
     command_vol_up = swayosd-client --output-volume raise
     binding_vol_up = KEY_VOLUMEUP
 
+    # 1. Captura uma área retangular (slurp) e envia para a área de transferência
     command_print = sh -c 'grim -g "$(slurp)" - | wl-copy'
     binding_print = KEY_SYSRQ
 
+    # 2. Captura a tela inteira e envia para a área de transferência (Super + Print)
     command_print_full = sh -c 'grim - | wl-copy'
-    binding_print_full = <shift> KEY_SYSRQ
+    binding_print_full = <super> KEY_SYSRQ
 
     [wm-actions]
     toggle_fullscreen = <super> KEY_F
