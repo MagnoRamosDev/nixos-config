@@ -191,6 +191,21 @@
     wl-clipboard
   ];
 
+  services.foundryvtt = {
+    enable = true;
+
+    # Você precisará baixar o .zip da versão Linux Node.js no site do Foundry
+    # e apontar o caminho absoluto dele aqui.
+    # Exemplo: "/home/magno/Downloads/foundryvtt-11.315.zip"
+    package = inputs.nix-foundryvtt.packages.${pkgs.system}.foundryvtt.override {
+      zipball = /mnt/armazenamento/FoundryVTT/FoundryVTT-Node-14.364.zip;
+    };
+
+    # Opcional: defina a porta e o diretório de dados
+    port = 30000;
+    dataPath = "/var/lib/foundryvtt";
+  };
+
   # ==========================================
   # USUÁRIOS
   # ==========================================
