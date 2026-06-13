@@ -13,12 +13,6 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # 1. Adicionando o input do Foundry VTT
-    nix-foundryvtt = {
-      url = "github:reckenrode/nix-foundryvtt";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -35,9 +29,6 @@
         modules = [
           ./hosts/magno-pc/configuration.nix
           home-manager.nixosModules.home-manager
-
-          # 2. Importando o módulo para o seu sistema
-          inputs.nix-foundryvtt.nixosModules.foundryvtt
         ];
       };
     };
