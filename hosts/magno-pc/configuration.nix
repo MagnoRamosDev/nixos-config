@@ -250,7 +250,6 @@
         #../../modules/home/waybar.nix
         ../../modules/home/pacotes.nix
         ../../modules/home/drives.nix
-        ../../modules/home/virtualisation.nix
 
         # AMBIENTES DE DESENVOLVIMENTO
         # ../../modules/home/dev/dev-vala.nix
