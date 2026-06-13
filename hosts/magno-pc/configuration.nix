@@ -203,7 +203,7 @@
 
     # Opcional: defina a porta e o diretório de dados
     port = 30000;
-    dataPath = "/var/lib/foundryvtt";
+    dataDir = "/var/lib/foundryvtt";
   };
 
   # ==========================================
