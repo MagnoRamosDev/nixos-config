@@ -10,7 +10,7 @@
         "/var/lib/foundryvtt:/data"
       ];
       environmentFiles = [
-        "/var/secrets/foundry.env"
+        "/mnt/armazenamento/FoundryVTT/foundry.env"
       ];
     };
   };
