@@ -4,6 +4,7 @@
   fetchurl,
   autoPatchelfHook,
   libsecret,
+  makeWrapper,
 }:
 
 stdenv.mkDerivation rec {
@@ -20,6 +21,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     autoPatchelfHook
+    makeWrapper
   ];
 
   buildInputs = [
@@ -28,11 +30,11 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
-
-    # 2. Copia o próprio arquivo baixado ($src) direto para a pasta destino
     cp $src $out/bin/${pname}
-
     chmod +x $out/bin/${pname}
+
+    wrapProgram $out/bin/${pname} \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libsecret ]}"
   '';
 
   meta = with lib; {
