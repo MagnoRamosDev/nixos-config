@@ -4,6 +4,7 @@
   fetchurl,
   autoPatchelfHook,
   libsecret,
+  glib,
   makeWrapper,
 }:
 
@@ -26,6 +27,8 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     libsecret
+    glib
+    stdenv.cc.cc.lib
   ];
 
   installPhase = ''
@@ -34,7 +37,14 @@ stdenv.mkDerivation rec {
     chmod +x $out/bin/${pname}
 
     wrapProgram $out/bin/${pname} \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libsecret ]}"
+      --prefix LD_LIBRARY_PATH : "${
+        lib.makeLibraryPath [
+          libsecret
+          glib
+          stdenv.cc.cc.lib
+        ]
+      }" \
+      --prefix PATH : "${lib.makeBinPath [ libsecret ]}"
   '';
 
   meta = with lib; {
