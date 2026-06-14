@@ -22,8 +22,7 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
-    # stdenv.cc.cc.lib
-    # zlib
+    libsecret
   ];
 
   installPhase = ''
