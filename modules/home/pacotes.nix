@@ -31,7 +31,7 @@
     grim
     swappy
     qalculate-gtk
-    (callPackage ../packages/proton-drive.nix { })
+    (callPackage ../packages/proton_drive_cli.nix { })
   ];
 
   programs.direnv = {
