@@ -15,6 +15,7 @@ stdenv.mkDerivation rec {
   };
 
   dontUnpack = true;
+  dontStrip = true;
 
   nativeBuildInputs = [
     autoPatchelfHook
