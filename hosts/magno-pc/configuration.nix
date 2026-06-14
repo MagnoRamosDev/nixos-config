@@ -45,6 +45,8 @@
   i18n.defaultLocale = "pt_BR.UTF-8";
   console.keyMap = "br-abnt2";
 
+  services.gnome.gnome-keyring.enable = true;
+
   # ==========================================
   # ÁUDIO (PIPEWIRE) E HARDWARE
   # ==========================================
