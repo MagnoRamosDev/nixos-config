@@ -3,6 +3,7 @@
   stdenv,
   fetchurl,
   autoPatchelfHook,
+  libsecret,
 }:
 
 stdenv.mkDerivation rec {
