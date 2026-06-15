@@ -116,7 +116,6 @@
   # SERVIÇOS DO DESKTOP
   # ==========================================
   programs.dconf.enable = true;
-  programs.gamescope.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
@@ -155,7 +154,9 @@
   programs.firefox.enable = true;
   programs.fish.enable = true;
   programs.steam.enable = true;
-  programs.gamescope.enable = true;
+  programs.gamescope = {
+    enable = true;
+  };
   programs.gamemode.enable = true;
   programs.nano.enable = false;
   programs.nix-ld.enable = true;
