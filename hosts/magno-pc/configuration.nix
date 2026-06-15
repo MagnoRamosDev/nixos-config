@@ -212,6 +212,8 @@
     micro
     git
     wl-clipboard
+
+    gamescope
   ];
 
   # ==========================================
