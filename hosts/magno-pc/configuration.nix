@@ -116,6 +116,7 @@
   # SERVIÇOS DO DESKTOP
   # ==========================================
   programs.dconf.enable = true;
+  programs.gamescope.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
