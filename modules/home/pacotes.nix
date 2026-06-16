@@ -32,6 +32,7 @@
     swappy
     qalculate-gtk
     (callPackage ../packages/proton_drive_cli.nix { })
+    (callPackage ../packages/hydra_launcher.nix { })
   ];
 
   programs.direnv = {
