@@ -12,4 +12,18 @@ pkgs.appimageTools.wrapType2 {
   };
 
   extraPkgs = pkgs: with pkgs; [ ];
+
+  extraInstallCommands = ''
+    mkdir -p $out/share/applications
+
+    cat > $out/share/applications/hydra-launcher.desktop <<EOF
+    [Desktop Entry]
+    Name=Hydra Launcher
+    Comment=Game Launcher
+    Exec=hydra-launcher
+    Terminal=false
+    Type=Application
+    Categories=Game;
+    EOF
+  '';
 }
