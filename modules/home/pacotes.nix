@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     mangohud
     heroic
     sublime4
@@ -20,16 +19,12 @@
     playerctl
     mission-center
     cliphist
-    wl-clipboard
-    slurp
     obsidian
     rclone
     gamescope
     teams-for-linux
     zapzap
     solaar
-    grim
-    swappy
     qalculate-gtk
     (callPackage ../packages/proton_drive_cli.nix { })
     (callPackage ../packages/hydra_launcher.nix { })

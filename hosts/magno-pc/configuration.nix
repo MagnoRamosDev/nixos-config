@@ -16,10 +16,12 @@
     substituters = [
       "https://cache.nixos.org"
       "https://noctalia.cachix.org"
+      "https://cosmic.cachix.org/"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
     ];
   };
 
@@ -76,41 +78,9 @@
   # ==========================================
   # INTERFACE E LOGIN
   # ==========================================
-  nixpkgs.overlays = [
-    (final: prev: {
-      wf-config = prev.wf-config.overrideAttrs (old: {
-        mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dtests=disabled" ];
-      });
-
-      wayfire = prev.wayfire.overrideAttrs (old: {
-        mesonFlags = (old.mesonFlags or [ ]) ++ [
-          "-Dtests=disabled"
-          "-Dwf-touch:tests=disabled"
-        ];
-      });
-    })
-  ];
-
-  programs.wayfire = {
-    enable = true;
-    plugins = with pkgs.wayfirePlugins; [
-      wcm
-      wayfire-plugins-extra
-    ];
-  };
   security.polkit.enable = true;
-
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "pixie";
-    package = pkgs.kdePackages.sddm;
-    settings = {
-      Theme = {
-        CursorTheme = "breeze_cursors";
-      };
-    };
-  };
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   # ==========================================
   # SERVIÇOS DO DESKTOP
@@ -123,7 +93,6 @@
     enable = true;
     wlr.enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
     ];
     config.common.default = "wlr";
@@ -176,20 +145,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    (stdenv.mkDerivation {
-      name = "pixie-sddm";
-      src = fetchFromGitHub {
-        owner = "xCaptaiN09";
-        repo = "pixie-sddm";
-        rev = "main";
-        hash = "sha256-1PDWX8bJfc0HYMW9MsxWwDXDoYy5aaehUWr7FW3yR9U=";
-      };
-      installPhase = ''
-        mkdir -p $out/share/sddm/themes/pixie
-        cp -r * $out/share/sddm/themes/pixie/
-      '';
-    })
-
     kdePackages.qtdeclarative
     kdePackages.qtsvg
     kdePackages.qt5compat
@@ -253,13 +208,10 @@
       home.enableNixpkgsReleaseCheck = false;
 
       imports = [
-        ../../modules/home/wayfire.nix
-        #../../modules/home/waybar.nix
         ../../modules/home/pacotes.nix
         ../../modules/home/drives.nix
 
         # AMBIENTES DE DESENVOLVIMENTO
-        # ../../modules/home/dev/dev-vala.nix
         ../../modules/home/dev/dev-zig.nix
         ../../modules/home/dev/dev-nix.nix
         ../../modules/home/dev/dev-rust.nix
