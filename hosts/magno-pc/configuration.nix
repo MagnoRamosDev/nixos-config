@@ -149,10 +149,7 @@
     kdePackages.qtsvg
     kdePackages.qt5compat
     kdePackages.polkit-kde-agent-1
-
     swayosd
-    wlogout
-    swaybg
 
     nautilus
     adwaita-icon-theme
