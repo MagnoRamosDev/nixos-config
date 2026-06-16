@@ -5,17 +5,15 @@
     mangohud
     heroic
     sublime4
-    discord
+    vesktop
     nh
     starship
     eza
     bat
     zoxide
     zed-editor
-    gnome-weather
     pwvucontrol
     networkmanagerapplet
-    gnome-calendar
     playerctl
     mission-center
     cliphist
