@@ -38,6 +38,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
   # ==========================================
   # REDE E SISTEMA
   # ==========================================
