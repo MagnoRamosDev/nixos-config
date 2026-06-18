@@ -59,6 +59,25 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
+    wireplumber.extraConfig = {
+      "52-force-software-mixer" = {
+        "monitor.alsa.rules" = [
+          {
+            matches = [
+              {
+                "node.name" = "~alsa_input.*";
+              }
+            ];
+            actions = {
+              update-props = {
+                "api.alsa.soft-mixer" = true;
+              };
+            };
+          }
+        ];
+      };
+    };
   };
 
   hardware.graphics = {
