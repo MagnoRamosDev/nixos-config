@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    qml-language-server.url = "github:cushycush/qml-language-server";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";

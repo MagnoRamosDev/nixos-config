@@ -163,6 +163,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    inputs.qml-language-server.packages.${pkgs.system}.default
     kdePackages.qtdeclarative
     kdePackages.qtsvg
     kdePackages.qt5compat
