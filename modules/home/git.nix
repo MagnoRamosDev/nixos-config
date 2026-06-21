@@ -13,6 +13,15 @@
       init.defaultBranch = "main";
       pull.rebase = true;
     };
+
+    includes = [
+      {
+        condition = "gitdir:~/Projetos/gitlab/";
+        contents = {
+          user.email = "magnoramosdeveloper+gitlab@gmail.com";
+        };
+      }
+    ];
   };
 
   # ==========================================
@@ -29,11 +38,17 @@
         identityFile = "~/.ssh/id_ed25519";
         identitiesOnly = true;
       };
-
       "codeberg.org" = {
         hostname = "codeberg.org";
         user = "git";
-        identityFile = "~/.ssh/id_ed25519"; # Usando a mesma chave
+        identityFile = "~/.ssh/id_ed25519";
+        identitiesOnly = true;
+      };
+
+      "gitlab.com" = {
+        hostname = "gitlab.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519_gitlab";
         identitiesOnly = true;
       };
     };
