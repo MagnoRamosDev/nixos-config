@@ -4,9 +4,7 @@
   home.packages = with pkgs; [
     quickshell
     mangohud
-    heroic
     sublime4
-    vesktop
     nh
     starship
     eza
@@ -16,15 +14,9 @@
     pwvucontrol
     networkmanagerapplet
     playerctl
-    mission-center
     cliphist
-    obsidian
     rclone
-    gamescope
-    teams-for-linux
-    zapzap
     solaar
-    qalculate-gtk
     (callPackage ../packages/proton_drive_cli.nix { })
     (callPackage ../packages/hydra_launcher.nix { })
   ];

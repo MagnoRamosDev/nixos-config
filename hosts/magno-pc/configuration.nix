@@ -108,6 +108,7 @@
   programs.dconf.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
+  services.flatpak.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -173,12 +174,10 @@
     nautilus
     adwaita-icon-theme
     whitesur-icon-theme
-    loupe
     nautilus-python
 
     quickshell
     fuzzel
-    libreoffice-fresh
     ghostty
     micro
     git
