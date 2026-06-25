@@ -17,6 +17,7 @@
     cliphist
     rclone
     solaar
+    mission-center
     (callPackage ../packages/proton_drive_cli.nix { })
     (callPackage ../packages/hydra_launcher.nix { })
   ];
