@@ -18,6 +18,7 @@
     rclone
     solaar
     mission-center
+    ventoy
     (callPackage ../packages/proton_drive_cli.nix { })
     (callPackage ../packages/hydra_launcher.nix { })
   ];
