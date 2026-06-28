@@ -18,7 +18,7 @@
     rclone
     solaar
     mission-center
-    ventoy
+    ventoy-full-qt
     (callPackage ../packages/proton_drive_cli.nix { })
     (callPackage ../packages/hydra_launcher.nix { })
   ];
