@@ -25,6 +25,10 @@
     ];
   };
 
+  permittedInsecurePackages = [
+    "ventoy-qt5-1.1.12"
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [
