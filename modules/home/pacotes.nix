@@ -11,7 +11,6 @@
     quickshell
     # Games
     vesktop
-    winboat
     heroic
     (callPackage ../packages/hydra_launcher.nix { })
     # Drives
