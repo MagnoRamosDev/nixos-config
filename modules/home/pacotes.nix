@@ -2,23 +2,30 @@
 
 {
   home.packages = with pkgs; [
-    quickshell
-    mangohud
-    sublime4
-    nh
+    # System
     starship
-    eza
-    bat
-    zoxide
-    zed-editor
     pwvucontrol
-    networkmanagerapplet
-    playerctl
-    cliphist
-    rclone
     mission-center
-    (callPackage ../packages/proton_drive_cli.nix { })
+    cine
+    # Shell
+    quickshell
+    # Games
+    vesktop
+    winboat
+    heroic
     (callPackage ../packages/hydra_launcher.nix { })
+    # Drives
+    rclone
+    (callPackage ../packages/proton_drive_cli.nix { })
+    # Programing
+    sublime4
+    zed-editor
+    nh
+    # Others
+    libreoffice-qt6
+    obsidian
+    teams-for-linux
+    zapzap
   ];
 
   programs.direnv = {
