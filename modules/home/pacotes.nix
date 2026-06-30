@@ -26,6 +26,8 @@
     obsidian
     teams-for-linux
     zapzap
+    anki
+    qalculate-qt
   ];
 
   programs.direnv = {

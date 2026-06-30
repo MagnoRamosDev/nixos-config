@@ -183,7 +183,6 @@
     git
     wl-clipboard
 
-    gamescope
     appimage-run
   ];
 
