@@ -15,12 +15,10 @@
     ];
     substituters = [
       "https://cache.nixos.org"
-      "https://noctalia.cachix.org"
       "https://cosmic.cachix.org/"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
     ];
   };
@@ -29,6 +27,7 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
+    "pnpm-10.29.2"
   ];
 
   # ==========================================
@@ -141,6 +140,7 @@
   # ==========================================
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox;
     nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
   };
   programs.fish.enable = true;
@@ -187,6 +187,7 @@
     wl-clipboard
 
     appimage-run
+    firefoxpwa
   ];
 
   # ==========================================

@@ -26,7 +26,6 @@
     teams-for-linux
     anki
     qalculate-qt
-    firefoxpwa
   ];
 
   programs.direnv = {
