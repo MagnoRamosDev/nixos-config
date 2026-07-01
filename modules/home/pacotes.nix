@@ -5,6 +5,7 @@
     # System
     starship
     pwvucontrol
+    crosspipe
     mission-center
     cine
     # Shell
