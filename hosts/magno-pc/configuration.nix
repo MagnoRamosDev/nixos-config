@@ -132,7 +132,14 @@
       environmentFiles = [
         "/mnt/armazenamento/FoundryVTT/foundry.env"
       ];
+      extraOptions = [ "--health-start-period=60s" ];
     };
+  };
+
+  systemd.services."podman-foundryvtt" = {
+    preStart = ''
+      ${pkgs.podman}/bin/podman pull felddy/foundryvtt:release || true
+    '';
   };
 
   # ==========================================
