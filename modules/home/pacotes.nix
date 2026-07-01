@@ -24,9 +24,9 @@
     libreoffice-qt6
     obsidian
     teams-for-linux
-    zapzap
     anki
     qalculate-qt
+    firefoxpwa
   ];
 
   programs.direnv = {

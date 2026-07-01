@@ -139,7 +139,10 @@
   # ==========================================
   # PROGRAMAS GLOBAIS E PACOTES
   # ==========================================
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
+  };
   programs.fish.enable = true;
   programs.steam.enable = true;
   programs.gamescope = {
