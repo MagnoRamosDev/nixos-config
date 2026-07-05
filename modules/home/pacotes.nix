@@ -27,6 +27,7 @@
     teams-for-linux
     anki
     qalculate-qt
+    ciscoPacketTracer9
   ];
 
   programs.direnv = {
