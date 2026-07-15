@@ -8,6 +8,8 @@
     crosspipe
     mission-center
     cine
+    man-pages
+    man-pages-posix
     # Shell
     quickshell
     # Games

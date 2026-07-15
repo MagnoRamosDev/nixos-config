@@ -109,6 +109,8 @@
   services.tumbler.enable = true;
   services.flatpak.enable = true;
 
+  documentation.dev.enable = true;
+
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
