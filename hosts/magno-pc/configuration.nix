@@ -3,6 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/home/wayland_compositors/hyprland.nix
+    ../../modules/home/shells/dank.nix
   ];
 
   # ==========================================
@@ -98,8 +100,6 @@
   # INTERFACE E LOGIN
   # ==========================================
   security.polkit.enable = true;
-  services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
 
   # ==========================================
   # SERVIÇOS DO DESKTOP
@@ -177,19 +177,12 @@
 
   environment.systemPackages = with pkgs; [
     inputs.qml-language-server.packages.${pkgs.system}.default
-    kdePackages.qtdeclarative
-    kdePackages.qtsvg
-    kdePackages.qt5compat
-    kdePackages.polkit-kde-agent-1
-    swayosd
 
     nautilus
     adwaita-icon-theme
     whitesur-icon-theme
     nautilus-python
 
-    quickshell
-    fuzzel
     ghostty
     micro
     git

@@ -4,14 +4,9 @@
   home.packages = with pkgs; [
     # System
     starship
-    pwvucontrol
-    crosspipe
-    mission-center
     cine
     man-pages
     man-pages-posix
-    # Shell
-    quickshell
     # Games
     vesktop
     heroic
