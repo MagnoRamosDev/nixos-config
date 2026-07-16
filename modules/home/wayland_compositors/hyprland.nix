@@ -6,24 +6,21 @@
   home-manager.users.magno = {
     wayland.windowManager.hyprland = {
       enable = true;
-
       systemd.enable = true;
 
-      extraConfig = ''
-        # Inicia o serviço do Dank Shell assim que o compositor abrir
-        exec-once = systemctl --user start dms.service
+      settings = {
+        "$terminal" = "ghostty";
+        "$mainMod" = "SUPER";
 
-        # Seu terminal padrão
-        $terminal = ghostty
-        $mainMod = SUPER
+        bind = [
+          "$mainMod, Q, exec, $terminal"
+          "$mainMod, M, exit,"
+        ];
 
-        # Atalhos essenciais
-        bind = $mainMod, Q, exec, $terminal
-        bind = $mainMod, M, exit,
-
-        # Forçando modo flutuante para as janelas não quebrarem o layout do Dank
-        windowrulev2 = float, class:.*
-      '';
+        windowrulev2 = [
+          "float, class:.*"
+        ];
+      };
     };
   };
 }
