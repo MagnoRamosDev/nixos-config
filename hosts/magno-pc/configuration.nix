@@ -244,8 +244,6 @@
         SDL_VIDEODRIVER = "x11";
       };
 
-      services.swayosd.enable = true;
-
       gtk = {
         enable = true;
         iconTheme = {
