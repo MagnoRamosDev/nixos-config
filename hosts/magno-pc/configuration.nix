@@ -1,9 +1,14 @@
-{ pkgs, config, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
     ./hardware-configuration.nix
     ../../modules/home/wayland_compositors/hyprland.nix
+    ../../modules/home/wayland_compositors/wayfire.nix
     ../../modules/home/shells/dank.nix
   ];
 
@@ -109,15 +114,10 @@
   services.tumbler.enable = true;
   services.flatpak.enable = true;
 
-  systemd.user.extraConfig = ''DefaultEnvironment="WAYLAND_DISPLAY=${config.environment.variable.WAYLAND_DISPLAY or "wayland-0"}" "XDG_SESSION_TYPE=wayland" "XDG_CURRENT_DESKTOP=Hyprland"'';
-
   documentation.dev.enable = true;
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
   };
 
   virtualisation.podman = {
@@ -231,7 +231,7 @@
 
       imports = [
         ../../modules/home/pacotes.nix
-        ../../modules/home/drives.nix
+        #../../modules/home/drives.nix
 
         # AMBIENTES DE DESENVOLVIMENTO
         ../../modules/home/dev/dev-zig.nix

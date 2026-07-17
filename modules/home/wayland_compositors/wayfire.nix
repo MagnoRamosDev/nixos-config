@@ -1,57 +1,127 @@
 { pkgs, ... }:
 
 {
+  environment.systemPackages = [
+    pkgs.wayfire
+  ];
 
-  xdg.configFile."wayfire.ini".text = ''
-    [core]
-    plugins = autostart command vswitch move resize grid switcher window-rules animate wobbly decoration shortcuts-inhibit wm-actions
+  programs.wayfire = {
+    enable = true;
 
-    [input]
-    xkb_layout = br
-    xkb_model = abnt2
+    xwayland.enable = true;
+  };
 
-    [switcher]
-    next_view = <alt> KEY_TAB
+  home-manager.users.magno = {
+    xdg.configFile."wayfire.ini".text = ''
+      [core]
+      plugins = autostart command vswitch move resize grid switcher window-rules animate wobbly decoration shortcuts-inhibit wm-actions foreign-toplevel
 
-    [autostart]
-    dbus_update = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wayfire
+      [input]
+      xkb_layout = br
+      xkb_model = abnt2
 
-    panel = bash -c 'pgrep -x noctalia-shell || noctalia-shell'
+      [switcher]
+      next_view = <alt> KEY_TAB
 
-    # waybar = waybar
-    # swaync = swaync
+      [autostart]
+      dbus_update = dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP=wayfire
 
-    polkit = ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1
-    # wallpaper = mpvpaper -o "loop no-audio" '*' ~/Videos/wallpaper.mp4
-    cliphist_store = cliphist store
-    cliphist_watch = wl-paste --type text --watch cliphist store
+      # Inicia o serviço do Dank Material Shell ignorando dependências travadas
+      dms_shell = sh -c 'killall wf-panel wf-background; sleep 2 && systemctl --user start dms.service --ignore-dependencies'
 
-    [command]
-    command_launcher = noctalia-shell ipc call launcher toggle
-    binding_launcher = <super>
+      polkit = ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1
+      cliphist_store = cliphist store
+      cliphist_watch = wl-paste --type text --watch cliphist store
 
-    command_terminal = ghostty
-    binding_terminal = <ctrl> <alt> KEY_T
+      [command]
+      # === APLICATIVOS E TERMINAL ===
+      command_terminal = ghostty
+      binding_terminal = <ctrl> <alt> KEY_T
 
-    command_vol_up = swayosd-client --output-volume raise
-    binding_vol_up = KEY_VOLUMEUP
+      # === DANK MATERIAL SHELL INTERFACES ===
+      command_launcher = dms ipc call spotlight toggle
+      binding_launcher = <super>
 
-    # 1. Captura uma área retangular (slurp) e envia para a área de transferência
-    command_print = sh -c 'grim -g "$(slurp)" - | wl-copy'
-    binding_print = KEY_SYSRQ
+      command_spotlight_bar = dms ipc call spotlight-bar toggle
+      binding_spotlight_bar = <alt> KEY_SPACE
 
-    # 2. Captura a tela inteira e envia para a área de transferência (Super + Print)
-    command_print_full = sh -c 'grim - | wl-copy'
-    binding_print_full = <super> KEY_SYSRQ
+      command_clipboard = dms ipc call clipboard toggle
+      binding_clipboard = <super> KEY_V
 
-    [wm-actions]
-    toggle_fullscreen = <super> KEY_F
+      command_processlist = dms ipc call processlist focusOrToggle
+      binding_processlist = <super> KEY_M
 
-    [output:DP-1]
-    mode = 1920x1080@165001
-    position = 0, 0
-    transform = normal
-    adaptive_sync = true
-    scale = 1.0
-  '';
+      command_processlist_alt = dms ipc call processlist focusOrToggle
+      binding_processlist_alt = <ctrl> <alt> KEY_DELETE
+
+      command_settings = dms ipc call settings focusOrToggle
+      binding_settings = <super> KEY_COMMA
+
+      command_notifications = dms ipc call notifications toggle
+      binding_notifications = <super> KEY_N
+
+      command_notepad = dms ipc call notepad toggle
+      binding_notepad = <super> <shift> KEY_N
+
+      command_dash = dms ipc call dash toggle wallpaper
+      binding_dash = <super> KEY_Y
+
+      command_powermenu = dms ipc call powermenu toggle
+      binding_powermenu = <super> KEY_X
+
+      # === SEGURANÇA ===
+      command_lock = dms ipc call lock lock
+      binding_lock = <super> <alt> KEY_L
+
+      # === CAPTURAS DE TELA (Usando a ferramenta do Dank) ===
+      # Substitui as antigas do grim/slurp
+      command_print = dms screenshot
+      binding_print = KEY_SYSRQ
+
+      command_print_full = dms screenshot full
+      binding_print_full = <ctrl> KEY_SYSRQ
+
+      command_print_win = dms screenshot window
+      binding_print_win = <alt> KEY_SYSRQ
+
+      # === CONTROLES DE ÁUDIO (Usando o OSD do Dank) ===
+      command_vol_up = dms ipc call audio increment 3
+      binding_vol_up = KEY_VOLUMEUP
+
+      command_vol_down = dms ipc call audio decrement 3
+      binding_vol_down = KEY_VOLUMEDOWN
+
+      command_mute = dms ipc call audio mute
+      binding_mute = KEY_MUTE
+
+      command_micmute = dms ipc call audio micmute
+      binding_micmute = KEY_MICMUTE
+
+      command_playpause = dms ipc call mpris playPause
+      binding_playpause = KEY_PLAYPAUSE
+
+      command_next = dms ipc call mpris next
+      binding_next = KEY_NEXTSONG
+
+      command_prev = dms ipc call mpris previous
+      binding_prev = KEY_PREVIOUSSONG
+
+      # === CONTROLES DE BRILHO (Usando o OSD do Dank) ===
+      command_bright_up = dms ipc call brightness increment 5 ""
+      binding_bright_up = KEY_BRIGHTNESSUP
+
+      command_bright_down = dms ipc call brightness decrement 5 ""
+      binding_bright_down = KEY_BRIGHTNESSDOWN
+
+      [wm-actions]
+      toggle_fullscreen = <super> KEY_F
+
+      [output:DP-1]
+      mode = 1920x1080@165001
+      position = 0, 0
+      transform = normal
+      adaptive_sync = true
+      scale = 1.0
+    '';
+  };
 }

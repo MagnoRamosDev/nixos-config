@@ -36,7 +36,7 @@
   };
 
   services.displayManager = {
-    defaultSession = "hyprland";
+    defaultSession = "wayfire";
   };
 
   # ==========================================
