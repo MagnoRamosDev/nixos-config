@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, config, inputs, ... }:
 
 {
   imports = [
@@ -108,6 +108,8 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   services.flatpak.enable = true;
+
+  systemd.user.extraConfig = ''DefaultEnvironment="WAYLAND_DISPLAY=${config.environment.variable.WAYLAND_DISPLAY or "wayland-0"}" "XDG_SESSION_TYPE=wayland" "XDG_CURRENT_DESKTOP=Hyprland"'';
 
   documentation.dev.enable = true;
 

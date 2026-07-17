@@ -1,16 +1,11 @@
-{ pkgs, inputs, ... }:
+{ ... }:
 
 {
-  imports = [
-    inputs.dms-plugin-registry.nixosModules.default
-  ];
-
   # ==========================================
   # DANK MATERIAL SHELL
   # ==========================================
   programs.dms-shell = {
     enable = true;
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     systemd = {
       enable = true;
@@ -18,8 +13,10 @@
     };
 
     enableSystemMonitoring = true;
+    enableVPN = true;
     enableDynamicTheming = true;
     enableAudioWavelength = true;
+    enableCalendarEvents = true;
     enableClipboardPaste = true;
   };
 
@@ -28,7 +25,6 @@
   # ==========================================
   services.displayManager.dms-greeter = {
     enable = true;
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     compositor.name = "hyprland";
     configHome = "/home/magno";
@@ -40,10 +36,6 @@
   };
 
   services.displayManager = {
-    autoLogin = {
-      enable = true;
-      user = "magno";
-    };
     defaultSession = "hyprland";
   };
 
@@ -52,11 +44,10 @@
   # ==========================================
   programs.dsearch = {
     enable = true;
-    package = inputs.danksearch.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     systemd = {
       enable = true;
-      target = "graphical-session.target";
+      target = "default.target";
     };
   };
 }
