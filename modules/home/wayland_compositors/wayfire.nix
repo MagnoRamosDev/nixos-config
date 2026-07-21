@@ -14,7 +14,7 @@
   home-manager.users.magno = {
     xdg.configFile."wayfire.ini".text = ''
       [core]
-      plugins = autostart command vswitch move resize grid switcher window-rules animate wobbly decoration shortcuts-inhibit wm-actions foreign-toplevel
+      plugins = autostart command vswitch move resize grid switcher window-rules animate wobbly decoration shortcuts-inhibit wm-actions foreign-toplevel ipc
 
       [input]
       xkb_layout = br
