@@ -191,6 +191,7 @@
 
   environment.systemPackages = with pkgs; [
     inputs.qml-language-server.packages.${pkgs.system}.default
+    wayland-utils
 
     nautilus
     adwaita-icon-theme

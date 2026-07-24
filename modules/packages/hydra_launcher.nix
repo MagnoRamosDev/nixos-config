@@ -4,14 +4,12 @@
 
 pkgs.appimageTools.wrapType2 {
   pname = "hydra-launcher";
-  version = "4.0.0";
+  version = "4.0.6";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/hydralauncher/hydra/releases/download/v4.0.0/hydralauncher-4.0.0.AppImage";
-    hash = "sha256-epFymwQExsPHxAT/QOpL3cOOsbUg1WdttFQ+DKcAGRw=";
+    url = "https://github.com/hydralauncher/hydra/releases/download/v4.0.6/hydralauncher-4.0.6.AppImage";
+    hash = "sha256-LQ2z8yUUhKLs98YvHHLnhqqtcJFGIvEQ19kB5l0Ti9E=";
   };
-
-  extraPkgs = pkgs: with pkgs; [ ];
 
   extraInstallCommands = ''
     mkdir -p $out/share/applications
