@@ -112,9 +112,11 @@
   programs.dconf.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
-  services.flatpak.enable = true;
-
   documentation.dev.enable = true;
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = false;
+  };
 
   xdg.portal = {
     enable = true;
