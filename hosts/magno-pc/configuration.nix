@@ -204,6 +204,7 @@
     micro
     git
     wl-clipboard
+    vesktop
 
     appimage-run
     firefoxpwa

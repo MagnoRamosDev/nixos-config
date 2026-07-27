@@ -50,4 +50,14 @@
       target = "default.target";
     };
   };
+
+  systemd.user.services.dms.environment = {
+    NIXOS_OZONE_WL = "1";
+    XDG_SESSION_TYPE = "wayland";
+  };
+
+  systemd.user.services.dsearch.environment = {
+    NIXOS_OZONE_WL = "1";
+    XDG_SESSION_TYPE = "wayland";
+  };
 }
