@@ -259,6 +259,7 @@
         EDITOR = "subl";
         XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
         SDL_VIDEODRIVER = "x11";
+        NIXOS_OZONE_WL = "1";
       };
 
       gtk = {
