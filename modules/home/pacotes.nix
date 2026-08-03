@@ -19,6 +19,8 @@
     zed-editor
     nh
     # Others
+    filezilla
+    putty
     libreoffice-qt6
     obsidian
     teams-for-linux
