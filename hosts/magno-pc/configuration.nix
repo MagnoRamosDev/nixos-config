@@ -163,11 +163,6 @@
   # ==========================================
   # PROGRAMAS GLOBAIS E PACOTES
   # ==========================================
-  programs.firefox = {
-    enable = true;
-    package = pkgs.firefox;
-    nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
-  };
   programs.fish.enable = true;
   programs.steam.enable = true;
   programs.gamescope = {
@@ -207,7 +202,7 @@
     vesktop
 
     appimage-run
-    firefoxpwa
+    brave
   ];
 
   # ==========================================
