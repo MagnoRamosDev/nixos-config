@@ -25,6 +25,7 @@
     anki
     qalculate-qt
     ciscoPacketTracer9
+    proton-vpn
   ];
 
   programs.direnv = {
