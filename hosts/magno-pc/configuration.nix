@@ -10,6 +10,7 @@
     ../../modules/home/wayland_compositors/hyprland.nix
     ../../modules/home/wayland_compositors/wayfire.nix
     ../../modules/home/shells/dank.nix
+    inputs.openlogi.nixosModules.default
   ];
 
   # ==========================================
@@ -171,6 +172,7 @@
   programs.gamemode.enable = true;
   programs.nano.enable = false;
   programs.nix-ld.enable = true;
+  programs.openlogi.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
