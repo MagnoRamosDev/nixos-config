@@ -26,6 +26,9 @@
     qalculate-qt
     ciscoPacketTracer9
     proton-vpn
+
+    gtk4
+    gtk4-layer-shell
   ];
 
   programs.direnv = {
