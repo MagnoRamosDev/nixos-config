@@ -26,6 +26,7 @@
     qalculate-qt
     ciscoPacketTracer9
     proton-vpn
+    mission-center
 
     gtk4
     gtk4-layer-shell
