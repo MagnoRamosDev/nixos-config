@@ -8,7 +8,7 @@ pkgs.appimageTools.wrapType2 {
 
   src = pkgs.fetchurl {
     url = "https://curseforge.overwolf.com/downloads/curseforge-latest-linux.AppImage";
-    hash = "sha256-ocLq6EaM2E/yvH9zH2ESXZ8eLiquRHxStT/CDhJ2OdQ=";
+    hash = "sha256-4DQZNlrJGY1gGAyqB74+vhhI9lCDPAEQrayhSX5G0Uc=";
   };
 
   extraInstallCommands = ''
