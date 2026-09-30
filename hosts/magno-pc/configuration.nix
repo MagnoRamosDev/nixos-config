@@ -302,6 +302,7 @@
         ../../modules/home/dev/dev-nix.nix
         ../../modules/home/dev/dev-rust.nix
         ../../modules/home/dev/dev-python.nix
+        ../../modules/home/dev/dev-opengl.nix
       ];
 
       home.sessionVariables = {
