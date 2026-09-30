@@ -189,20 +189,33 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    inputs.qml-language-server.packages.${pkgs.system}.default
-    wayland-utils
+    # Drivers
+    mesa
+    mesa.drivers
 
+    # OpenGL ES
+    libGL
+    glm
+
+    # Text rendering
+    freetype
+    harfbuzz
+
+    # Wayland
+    wayland
+    wayland-protocols
+    wlroots
+
+    # Apps
     nautilus
     adwaita-icon-theme
     whitesur-icon-theme
     nautilus-python
-
     ghostty
     micro
     git
     wl-clipboard
     vesktop
-
     appimage-run
     brave
   ];
