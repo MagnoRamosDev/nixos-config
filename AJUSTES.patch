@@ -1,0 +1,197 @@
+--- original/flake.nix
++++ flake.nix
+@@ -3,7 +3,6 @@
+ 
+   inputs = {
+     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+-    qml-language-server.url = "github:cushycush/qml-language-server";
+ 
+     home-manager = {
+       url = "github:nix-community/home-manager/release-26.05";
+--- original/configuration.nix
++++ hosts/magno-pc/configuration.nix
+@@ -33,6 +33,9 @@
+ 
+   nixpkgs.config.allowUnfree = true;
+ 
++  # Exceções temporárias: mantenha somente enquanto algum pacote realmente exigir.
++  # openssl-1.1.1w é puxado pelo Sublime Text 4 no nixpkgs 26.05.
++  # pnpm-10.29.2 deve ser removido assim que identificarmos qual pacote ainda o exige.
+   nixpkgs.config.permittedInsecurePackages = [
+     "openssl-1.1.1w"
+     "pnpm-10.29.2"
+@@ -42,6 +45,7 @@
+   # BOOTLOADER E KERNEL
+   # ==========================================
+   boot.loader.systemd-boot.enable = true;
++  boot.loader.systemd-boot.configurationLimit = 10;
+   boot.loader.efi.canTouchEfiVariables = true;
+   boot.kernelPackages = pkgs.linuxPackages_latest;
+ 
+@@ -102,6 +106,8 @@
+     fileSystems = [ "/" ];
+   };
+ 
++  services.fstrim.enable = true;
++
+   # ==========================================
+   # INTERFACE E LOGIN
+   # ==========================================
+@@ -114,9 +120,25 @@
+   services.gvfs.enable = true;
+   services.tumbler.enable = true;
+   documentation.dev.enable = true;
++  # O flake principal está assumido em /etc/nixos.
++  # Se o seu repositório estiver em outro caminho, altere somente esta linha.
+   system.autoUpgrade = {
+     enable = true;
++    flake = "/etc/nixos#magno-pc";
++    dates = "weekly";
++    randomizedDelaySec = "45min";
+     allowReboot = false;
++  };
++
++  nix.gc = {
++    automatic = true;
++    dates = "weekly";
++    options = "--delete-older-than 14d";
++  };
++
++  nix.optimise = {
++    automatic = true;
++    dates = [ "weekly" ];
+   };
+ 
+   xdg.portal = {
+@@ -125,13 +147,19 @@
+       pkgs.xdg-desktop-portal-wlr
+       pkgs.xdg-desktop-portal-gtk
+     ];
++
++    # Cada compositor usa o portal apropriado.
++    # O módulo do Hyprland fornece xdg-desktop-portal-hyprland.
+     config = {
+-      common = {
+-        default = [
+-          "wlr"
+-          "gtk"
+-        ];
+-      };
++      common.default = [ "gtk" ];
++      hyprland.default = [
++        "hyprland"
++        "gtk"
++      ];
++      wayfire.default = [
++        "wlr"
++        "gtk"
++      ];
+     };
+   };
+ 
+@@ -143,7 +171,8 @@
+   virtualisation.oci-containers = {
+     backend = "podman";
+     containers.foundryvtt = {
+-      image = "felddy/foundryvtt:release";
++      # Segue atualizações da versão 14 sem avançar automaticamente para a 15.
++      image = "ghcr.io/felddy/foundryvtt:14";
+       ports = [ "30000:30000" ];
+       volumes = [
+         "/var/lib/foundryvtt:/data"
+@@ -156,10 +185,17 @@
+   };
+ 
+   systemd.services."podman-foundryvtt" = {
++    requiresMountsFor = [ "/mnt/armazenamento/FoundryVTT" ];
++    wants = [ "network-online.target" ];
++    after = [ "network-online.target" ];
++
+     preStart = ''
+-      ${pkgs.podman}/bin/podman pull felddy/foundryvtt:release || true
++      ${pkgs.podman}/bin/podman pull ghcr.io/felddy/foundryvtt:14 || true
+     '';
+   };
++
++  # Foundry VTT publicado na rede pelo host.
++  networking.firewall.allowedTCPPorts = [ 30000 ];
+ 
+   # ==========================================
+   # PROGRAMAS GLOBAIS E PACOTES
+@@ -189,12 +225,8 @@
+   ];
+ 
+   environment.systemPackages = with pkgs; [
+-    # Drivers
+-    mesa
+-    mesa.drivers
+-
+-    # OpenGL ES
+-    libGL
++    # OpenGL / OpenGL ES / EGL para desenvolvimento.
++    # Os drivers em si são gerenciados por hardware.graphics.
+     libglvnd
+     pkg-config
+     glm
+@@ -217,6 +249,7 @@
+     micro
+     git
+     wl-clipboard
++    cliphist
+     vesktop
+     appimage-run
+     brave
+@@ -259,7 +292,8 @@
+ 
+       imports = [
+         ../../modules/home/pacotes.nix
+-        #../../modules/home/drives.nix
++        ../../modules/home/git.nix
++        # ../../modules/home/drives.nix
+ 
+         # AMBIENTES DE DESENVOLVIMENTO
+         ../../modules/home/dev/dev-zig.nix
+@@ -271,7 +305,6 @@
+       home.sessionVariables = {
+         EDITOR = "subl";
+         XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
+-        SDL_VIDEODRIVER = "x11";
+         NIXOS_OZONE_WL = "1";
+       };
+ 
+--- original/proton_drive_cli.nix
++++ modules/packages/proton_drive_cli.nix
+@@ -10,7 +10,7 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "proton-drive";
+-  version = "0.4.4";
++  version = "0.6.0";
+ 
+   src = fetchurl {
+     url = "https://proton.me/download/drive/cli/0.6.0/linux-x64/proton-drive";
+--- original/drives.nix
++++ modules/home/drives.nix
+@@ -11,7 +11,9 @@
+     };
+     Service = {
+       Environment = "PATH=/run/wrappers/bin:/run/current-system/sw/bin";
++      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/GoogleDrive";
+       ExecStart = "${pkgs.rclone}/bin/rclone mount google_drive: %h/GoogleDrive --vfs-cache-mode full";
++      ExecStop = "${pkgs.fuse3}/bin/fusermount3 -u %h/GoogleDrive";
+       Restart = "on-failure";
+       RestartSec = "10s";
+     };
+--- original/wayfire.nix
++++ modules/home/wayland_compositors/wayfire.nix
+@@ -30,8 +30,8 @@
+       dms_shell = sh -c 'killall wf-panel wf-background; sleep 2 && systemctl --user start dms.service --ignore-dependencies'
+ 
+       polkit = ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1
+-      cliphist_store = cliphist store
+-      cliphist_watch = wl-paste --type text --watch cliphist store
++      cliphist_watch_text = wl-paste --type text --watch cliphist store
++      cliphist_watch_image = wl-paste --type image --watch cliphist store
+ 
+       [command]
+       # === APLICATIVOS E TERMINAL ===

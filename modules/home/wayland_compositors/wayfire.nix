@@ -30,8 +30,8 @@
       dms_shell = sh -c 'killall wf-panel wf-background; sleep 2 && systemctl --user start dms.service --ignore-dependencies'
 
       polkit = ${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1
-      cliphist_store = cliphist store
-      cliphist_watch = wl-paste --type text --watch cliphist store
+      cliphist_watch_text = wl-paste --type text --watch cliphist store
+      cliphist_watch_image = wl-paste --type image --watch cliphist store
 
       [command]
       # === APLICATIVOS E TERMINAL ===

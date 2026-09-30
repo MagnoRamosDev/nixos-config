@@ -33,6 +33,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Exceções temporárias: mantenha somente enquanto algum pacote realmente exigir.
+  # openssl-1.1.1w é puxado pelo Sublime Text 4 no nixpkgs 26.05.
+  # pnpm-10.29.2 deve ser removido assim que identificarmos qual pacote ainda o exige.
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
     "pnpm-10.29.2"
@@ -42,6 +45,7 @@
   # BOOTLOADER E KERNEL
   # ==========================================
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -102,6 +106,8 @@
     fileSystems = [ "/" ];
   };
 
+  services.fstrim.enable = true;
+
   # ==========================================
   # INTERFACE E LOGIN
   # ==========================================
@@ -114,9 +120,24 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   documentation.dev.enable = true;
+  # Flake principal deste host.
   system.autoUpgrade = {
     enable = true;
+    flake = "/home/magno/Projetos/github/nixos-config#magno-pc";
+    dates = "weekly";
+    randomizedDelaySec = "45min";
     allowReboot = false;
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
   };
 
   xdg.portal = {
@@ -125,13 +146,19 @@
       pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
     ];
+
+    # Cada compositor usa o portal apropriado.
+    # O módulo do Hyprland fornece xdg-desktop-portal-hyprland.
     config = {
-      common = {
-        default = [
-          "wlr"
-          "gtk"
-        ];
-      };
+      common.default = [ "gtk" ];
+      hyprland.default = [
+        "hyprland"
+        "gtk"
+      ];
+      wayfire.default = [
+        "wlr"
+        "gtk"
+      ];
     };
   };
 
@@ -143,7 +170,8 @@
   virtualisation.oci-containers = {
     backend = "podman";
     containers.foundryvtt = {
-      image = "felddy/foundryvtt:release";
+      # Segue atualizações da versão 14 sem avançar automaticamente para a 15.
+      image = "ghcr.io/felddy/foundryvtt:14";
       ports = [ "30000:30000" ];
       volumes = [
         "/var/lib/foundryvtt:/data"
@@ -156,10 +184,20 @@
   };
 
   systemd.services."podman-foundryvtt" = {
+    unitConfig.RequiresMountsFor = [
+      "/mnt/armazenamento/FoundryVTT"
+    ];
+
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+
     preStart = ''
-      ${pkgs.podman}/bin/podman pull felddy/foundryvtt:release || true
+      ${pkgs.podman}/bin/podman pull ghcr.io/felddy/foundryvtt:14 || true
     '';
   };
+
+  # Foundry VTT publicado na rede pelo host.
+  networking.firewall.allowedTCPPorts = [ 30000 ];
 
   # ==========================================
   # PROGRAMAS GLOBAIS E PACOTES
@@ -189,12 +227,10 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # Drivers
-    mesa
-    mesa.drivers
-
-    # OpenGL ES
-    libGL
+    # OpenGL / OpenGL ES / EGL para desenvolvimento.
+    # Os drivers em si são gerenciados por hardware.graphics.
+    libglvnd
+    pkg-config
     glm
 
     # Text rendering
@@ -215,6 +251,7 @@
     micro
     git
     wl-clipboard
+    cliphist
     vesktop
     appimage-run
     brave
@@ -257,7 +294,8 @@
 
       imports = [
         ../../modules/home/pacotes.nix
-        #../../modules/home/drives.nix
+        ../../modules/home/git.nix
+        # ../../modules/home/drives.nix
 
         # AMBIENTES DE DESENVOLVIMENTO
         ../../modules/home/dev/dev-zig.nix
@@ -269,7 +307,6 @@
       home.sessionVariables = {
         EDITOR = "subl";
         XWAYLAND_FORCE_GRAB_KEYBOARD = "1";
-        SDL_VIDEODRIVER = "x11";
         NIXOS_OZONE_WL = "1";
       };
 

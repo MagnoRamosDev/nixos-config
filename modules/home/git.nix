@@ -6,10 +6,13 @@
   # ==========================================
   programs.git = {
     enable = true;
-    userName = "MagnoRamosDev";
-    userEmail = "magnoramosdeveloper@gmail.com";
 
-    extraConfig = {
+    settings = {
+      user = {
+        name = "MagnoRamosDev";
+        email = "magnoramosdeveloper@gmail.com";
+      };
+
       init.defaultBranch = "main";
       pull.rebase = true;
     };
@@ -29,27 +32,32 @@
   # ==========================================
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    enableDefaultConfig = false;
 
-    matchBlocks = {
-      "github.com" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519";
-        identitiesOnly = true;
+    settings = {
+      "*" = {
+        AddKeysToAgent = "yes";
       };
+
+      "github.com" = {
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519";
+        IdentitiesOnly = true;
+      };
+
       "codeberg.org" = {
-        hostname = "codeberg.org";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519";
-        identitiesOnly = true;
+        HostName = "codeberg.org";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519";
+        IdentitiesOnly = true;
       };
 
       "gitlab.com" = {
-        hostname = "gitlab.com";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519_gitlab";
-        identitiesOnly = true;
+        HostName = "gitlab.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519_gitlab";
+        IdentitiesOnly = true;
       };
     };
   };

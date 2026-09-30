@@ -10,7 +10,7 @@
 
 stdenv.mkDerivation rec {
   pname = "proton-drive";
-  version = "0.4.4";
+  version = "0.6.0";
 
   src = fetchurl {
     url = "https://proton.me/download/drive/cli/0.6.0/linux-x64/proton-drive";
