@@ -7,9 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/home/wayland_compositors/hyprland.nix
-    ../../modules/home/wayland_compositors/wayfire.nix
-    ../../modules/home/shells/dank.nix
+    ../../modules/home/shells/kde.nix
     inputs.openlogi.nixosModules.default
   ];
 
@@ -138,28 +136,6 @@
   nix.optimise = {
     automatic = true;
     dates = [ "weekly" ];
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
-    ];
-
-    # Cada compositor usa o portal apropriado.
-    # O módulo do Hyprland fornece xdg-desktop-portal-hyprland.
-    config = {
-      common.default = [ "gtk" ];
-      hyprland.default = [
-        "hyprland"
-        "gtk"
-      ];
-      wayfire.default = [
-        "wlr"
-        "gtk"
-      ];
-    };
   };
 
   virtualisation.podman = {
