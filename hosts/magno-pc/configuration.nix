@@ -55,7 +55,7 @@
   networking.networkmanager.enable = true;
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "pt_BR.UTF-8";
-  console.keyMap = "br-abnt2";
+  # console.keyMap = "br-abnt2";
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -219,15 +219,9 @@
     wlroots
 
     # Apps
-    nautilus
-    adwaita-icon-theme
-    whitesur-icon-theme
-    nautilus-python
     ghostty
     micro
     git
-    wl-clipboard
-    cliphist
     vesktop
     appimage-run
     brave
