@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 {
   home.packages = with pkgs; [
@@ -17,7 +17,7 @@
     (callPackage ../packages/proton_drive_cli.nix { })
     # Programing
     sublime4
-    zed-editor
+    pkgsUnstable.zed-editor
     nh
     # Others
     libreoffice-qt6
@@ -25,7 +25,6 @@
     teams-for-linux
     anki
     qalculate-qt
-    ciscoPacketTracer9
     proton-vpn
     mission-center
 

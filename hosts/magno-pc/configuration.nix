@@ -255,7 +255,10 @@
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "backup";
 
-  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.extraSpecialArgs = {
+    inherit inputs;
+    pkgsUnstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  };
 
   home-manager.users.magno =
     { pkgs, ... }:
