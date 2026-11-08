@@ -225,6 +225,7 @@
     vesktop
     appimage-run
     brave
+    unrar
   ];
 
   # ==========================================
