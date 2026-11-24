@@ -10,11 +10,9 @@
     # Games
     heroic
     (callPackage ../packages/hydra_launcher.nix { })
-    (callPackage ../packages/curse_forge.nix { })
     r2modman
     # Drives
     rclone
-    (callPackage ../packages/proton_drive_cli.nix { })
     # Programing
     sublime4
     pkgsUnstable.zed-editor
